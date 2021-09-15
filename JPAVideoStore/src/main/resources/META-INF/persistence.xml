@@ -3,7 +3,9 @@
   <persistence-unit name="VideoStore">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
-
+    
+	<class>com.skilldistillery.jpavideostore.entities.Customer</class>
+	
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sdvid?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
       <property name="javax.persistence.jdbc.user" value="student"/>
