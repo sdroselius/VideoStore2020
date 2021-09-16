@@ -2,12 +2,17 @@ package com.skilldistillery.jpavideostore.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Film {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String title;
@@ -19,7 +24,10 @@ public class Film {
 	private int length;
 	@Column(name = "replacement_cost")
 	private double replacementCost;
-
+	
+	@Enumerated(EnumType.STRING)
+	private Rating rating;
+	
 	public Film() {
 		super();
 	}
@@ -78,6 +86,14 @@ public class Film {
 
 	public void setReplacementCost(double replacementCost) {
 		this.replacementCost = replacementCost;
+	}
+
+	public Rating getRating() {
+		return rating;
+	}
+
+	public void setRating(Rating rating) {
+		this.rating = rating;
 	}
 
 	@Override
