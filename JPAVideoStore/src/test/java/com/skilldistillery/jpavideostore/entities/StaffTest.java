@@ -46,5 +46,15 @@ class StaffTest {
 		assertEquals("Larry", emp.getFirstName());
 		assertEquals("Kong", emp.getLastName());
 	}
+	
+	@Test
+	void test_Staff_Address_ManyToOne_relationship_mapping() {
+		assertNotNull(emp);
+		assertNotNull(emp.getAddress());
+		assertEquals("370 E. Rochelle Blvd", emp.getAddress().getStreet());
+		assertEquals("Las Vegas", emp.getAddress().getCity());
+	}
+	
+	
 
 }

@@ -51,4 +51,20 @@ class RentalTest {
 		assertNotNull(rental.getReturnDate());
 	}
 
+	@Test
+	void test_Rental_Staff_ManyToOne_relationship_mapping() {
+		assertNotNull(rental);
+		assertNotNull(rental.getStaff());
+		assertEquals("William", rental.getStaff().getFirstName());
+		assertEquals("Tingvold", rental.getStaff().getLastName());
+	}
+	
+	@Test
+	void test_Rental_Customer_ManyToOne_relationship_mapping() {
+		assertNotNull(rental);
+		assertNotNull(rental.getCustomer());
+		assertEquals("Charlotte", rental.getCustomer().getFirstName());
+		assertEquals("Hunter", rental.getCustomer().getLastName());
+	}
+	
 }

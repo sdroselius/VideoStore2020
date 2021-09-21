@@ -5,27 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
-public class Staff {
-	
+public class Actor {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
-	private String email;
-	
-	@ManyToOne
-	@JoinColumn(name = "address_id")
-	private Address address;
 
-	public Staff() {
+	public Actor() {
 		super();
 	}
 
@@ -53,28 +46,18 @@ public class Staff {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Customer [id=").append(id).append(", firstName=").append(firstName).append(", lastName=")
-				.append(lastName).append(", email=").append(email).append("]");
+		builder.append("Actor [id=").append(id).append(", firstName=").append(firstName).append(", lastName=")
+				.append(lastName).append("]");
 		return builder.toString();
+	}
+
+	public Actor(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 }

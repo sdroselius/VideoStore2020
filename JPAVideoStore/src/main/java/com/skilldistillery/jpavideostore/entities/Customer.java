@@ -1,12 +1,16 @@
 package com.skilldistillery.jpavideostore.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Customer {
@@ -23,6 +27,16 @@ public class Customer {
 	
 	@Column(name = "create_date")
 	private LocalDateTime createdAt;
+	
+//	@Column(name = "address_id")
+//	private int addressId;
+	
+	@OneToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
+	
+	@OneToMany(mappedBy = "customer")
+	private List<Rental> rentals;
 
 	public Customer() {
 		super();
@@ -66,6 +80,30 @@ public class Customer {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+//	public int getAddressId() {
+//		return addressId;
+//	}
+//
+//	public void setAddressId(int addressId) {
+//		this.addressId = addressId;
+//	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Rental> getRentals() {
+		return rentals;
+	}
+
+	public void setRentals(List<Rental> rentals) {
+		this.rentals = rentals;
 	}
 
 	@Override

@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class LanguageTest {
+class CountryTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Language lang;
+	private Country country;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,27 +31,19 @@ class LanguageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		lang = em.find(Language.class, 1);
+		country = em.find(Country.class, "CA");
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		lang = null;
+		country = null;
 	}
 
 	@Test
-	void test_Language_entity_mapping() {
-		assertNotNull(lang);
-		assertEquals("English", lang.getName());
+	void test_Country_entity_mapping() {
+		assertNotNull(country);
+		assertEquals("Canada", country.getName());
 	}
 
-	@Test
-	void test_Language_Film_OneToMany_relationship_mapping() {
-		assertNotNull(lang);
-		assertNotNull(lang.getFilms());
-		assertTrue(lang.getFilms().size() > 0);
-//		assertEquals(981, lang.getFilms().size());
-	}
-	
 }

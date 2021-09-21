@@ -53,4 +53,11 @@ class FilmTest {
 		assertEquals(Rating.PG, film.getRating());
 	}
 
+	@Test
+	void test_Film_Language_ManyToOne_relationship_mapping() {
+		assertNotNull(film);
+		assertNotNull(film.getLanguage());
+		assertEquals("Japanese", film.getLanguage().getName());
+	}
+	
 }
