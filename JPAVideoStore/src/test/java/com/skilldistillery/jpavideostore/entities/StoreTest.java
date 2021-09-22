@@ -52,5 +52,34 @@ class StoreTest {
 		assertEquals("264 Blanchard Ave", store.getAddress().getStreet());
 		assertEquals("Seattle", store.getAddress().getCity());
 	}
+
+	@Test
+	void test_Store_Customer_OneToMany_relationship_mapping() {
+		assertNotNull(store);
+		assertNotNull(store.getCustomers());
+		assertTrue(store.getCustomers().size() > 0);
+	}
+
+	@Test
+	void test_Store_Staff_OneToMany_relationship_mapping() {
+		assertNotNull(store);
+		assertNotNull(store.getStaffs());
+		assertTrue(store.getStaffs().size() > 0);
+	}
 	
+	@Test
+	void test_Store_Staff_OneToOne_relationship_mapping() {
+		assertNotNull(store);
+		assertNotNull(store.getManager());
+		assertEquals(7, store.getManager().getId());
+	}
+	
+	@Test
+	void test_Store_InventoryItem_OneToMany_relationship_mapping() {
+		assertNotNull(store);
+		assertNotNull(store.getItems());
+		assertTrue(store.getItems().size() > 0);
+	}
+	
+
 }

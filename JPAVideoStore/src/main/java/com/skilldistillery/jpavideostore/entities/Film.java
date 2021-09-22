@@ -1,5 +1,10 @@
 package com.skilldistillery.jpavideostore.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Film {
@@ -30,9 +37,21 @@ public class Film {
 	@Enumerated(EnumType.STRING)
 	private Rating rating;
 	
-	@ManyToOne
+//	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "language_id")
 	private Language language;
+	
+	@ManyToMany(mappedBy = "films")
+	private List<Actor> actors;
+	
+	@ManyToMany(mappedBy = "films")
+	private List<Category> categories;
+	// TODO: add/remove methods
+	
+	@OneToMany(mappedBy = "film")
+	private List<InventoryItem> items;
+	// TODO: add/remove methods
 	
 	public Film() {
 		super();
@@ -110,6 +129,45 @@ public class Film {
 		this.language = language;
 	}
 
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+	
+	public void addActor(Actor actor) {
+		if (actors == null) { actors = new ArrayList<>(); }
+		if ( ! actors.contains(actor)) {
+			actors.add(actor);
+			actor.addFilm(this);
+		}
+	}
+	
+	public void removeActor(Actor actor) {
+		if ( actors != null && actors.contains(actor)) {
+			actors.remove(actor);
+			actor.removeFilm(this);
+		}
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+	public List<InventoryItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<InventoryItem> items) {
+		this.items = items;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -118,5 +176,22 @@ public class Film {
 				.append(rentalRate).append(", length=").append(length).append(", replacementCost=")
 				.append(replacementCost).append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		return id == other.id;
 	}
 }

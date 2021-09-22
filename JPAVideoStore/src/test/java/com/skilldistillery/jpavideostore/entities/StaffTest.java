@@ -55,6 +55,13 @@ class StaffTest {
 		assertEquals("Las Vegas", emp.getAddress().getCity());
 	}
 	
+	@Test
+	void test_Staff_Store_ManyToOne_mapping() {
+		assertNotNull(emp);
+		assertNotNull(emp.getStore());
+		assertEquals(4, emp.getStore().getId());
+	}
+	
 	
 
 }

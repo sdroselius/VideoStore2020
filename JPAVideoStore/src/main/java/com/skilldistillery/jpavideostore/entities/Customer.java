@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -38,6 +40,10 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
 	private List<Rental> rentals;
 
+	@ManyToOne
+	@JoinColumn(name = "store_id")
+	private Store store;
+	
 	public Customer() {
 		super();
 	}
@@ -106,11 +112,20 @@ public class Customer {
 		this.rentals = rentals;
 	}
 
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Customer [id=").append(id).append(", firstName=").append(firstName).append(", lastName=")
-				.append(lastName).append(", email=").append(email).append(", createdAt=").append(createdAt).append("]");
+				.append(lastName).append(", email=").append(email).append(", createdAt=").append(createdAt)
+				.append(", address=").append(address).append(", store=").append(store).append("]");
 		return builder.toString();
 	}
 

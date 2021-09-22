@@ -60,4 +60,29 @@ class FilmTest {
 		assertEquals("Japanese", film.getLanguage().getName());
 	}
 	
+	@Test
+	void test_Film_Actor_ManyToMany_relationship_mapping() {
+		assertNotNull(film);
+		assertNotNull(film.getActors());
+		assertTrue(film.getActors().size() > 0);
+//		assertEquals(10, film.getActors().size());
+	}
+	
+	@Test
+	void test_Film_Category_ManyToMany_relationship_mapping() {
+		assertNotNull(film);
+		assertNotNull(film.getCategories());
+		assertTrue(film.getCategories().size() > 0);
+//		assertEquals(1, film.getCategories().size());
+	}
+	
+	@Test
+	void test_Film_InventoryItem_OneToMany_relationship_mapping() {
+		assertNotNull(film);
+		assertNotNull(film.getItems());
+		assertTrue(film.getItems().size() > 0);
+	}
+	
+	
+	
 }

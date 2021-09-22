@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ActorTest {
+class InventoryItemTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Actor actor;
+	private InventoryItem item;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,29 +31,42 @@ class ActorTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		actor = em.find(Actor.class, 1);
+		item = em.find(InventoryItem.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		actor = null;
+		item = null;
 	}
 
 	@Test
-	void test_Actor_entity_mapping() {
-		assertNotNull(actor);
-		assertEquals("Penelope", actor.getFirstName());
-		assertEquals("Guiness", actor.getLastName());
+	void test_InventoryItem_entity_mapping() {
+		assertNotNull(item);
+		assertEquals(MediaCondition.Used, item.getMediaCondition());
+	}
+	
+	@Test
+	void test_InventoryItem_Film_ManyToOne_relationship_mapping() {
+		assertNotNull(item);
+		assertNotNull(item.getFilm());
+		assertEquals(1, item.getFilm().getId());
 	}
 
 	@Test
-	void test_Actor_Film_ManyToMany_relationship_mapping() {
-		assertNotNull(actor);
-		assertNotNull(actor.getFilms());
-		assertTrue(actor.getFilms().size() > 0);
-		assertEquals(19, actor.getFilms().size());
+	void test_InventoryItem_Store_ManyToOne_relationship_mapping() {
+		assertNotNull(item);
+		assertNotNull(item.getStore());
+		assertEquals(1, item.getStore().getId());
+	}
+	
+	@Test
+	void test_InventoryItem_Rental_OneToMany_relationship_mapping() {
+		assertNotNull(item);
+		assertNotNull(item.getRentals());
+		assertTrue(item.getRentals().size() > 1);
 	}
 	
 
+	
 }

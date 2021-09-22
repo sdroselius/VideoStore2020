@@ -24,6 +24,10 @@ public class Staff {
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
+	
+	@ManyToOne
+	@JoinColumn(name = "store_id")
+	private Store store;
 
 	public Staff() {
 		super();
@@ -67,6 +71,14 @@ public class Staff {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
 	}
 
 	@Override

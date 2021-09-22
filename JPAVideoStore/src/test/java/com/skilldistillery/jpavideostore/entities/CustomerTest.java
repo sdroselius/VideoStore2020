@@ -75,4 +75,12 @@ class CustomerTest {
 //		assertEquals(95, cust.getRentals().size());
 	}
 
+	@Test
+	public void test_Customer_Store_ManyToOne_relationship() {
+		assertNotNull(cust);
+		assertNotNull(cust.getStore());
+		assertEquals(7, cust.getStore().getId());
+	}
+	
+	
 }

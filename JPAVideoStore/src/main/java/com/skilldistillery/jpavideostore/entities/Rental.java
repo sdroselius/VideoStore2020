@@ -1,6 +1,7 @@
 package com.skilldistillery.jpavideostore.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Rental {
@@ -29,6 +31,13 @@ public class Rental {
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name = "inventory_id")
+	private InventoryItem inventoryItem;
+	
+	@OneToMany(mappedBy = "rental")
+	private List<Payment> payments;
 	
 	public Rental() {
 		super();
@@ -72,6 +81,22 @@ public class Rental {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public InventoryItem getInventoryItem() {
+		return inventoryItem;
+	}
+
+	public void setInventoryItem(InventoryItem item) {
+		this.inventoryItem = item;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
 	}
 
 	@Override
